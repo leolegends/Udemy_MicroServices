@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "e229aae3-e0fd-4938-b8ea-67c2af6a2d55",
+		"name": "Express Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Credenciamento",
+			"description": null,
+			"item": [
+				{
+					"name": "Criar Credencial - Express Gateway",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"consumerId\": \"leolegends\",\n  \"type\": \"key-auth\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9876/credentials?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"credentials"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "apiKey",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuário - Express Gateway",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"leolegends\",   \n  \"firstname\": \"Leonardo\", \n  \"lastname\": \"Ribeiro\",  \n  \"email\": \"leonardo.ribeiro@yahoo.com.br\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9876/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Usuario Especifico - Express Gateway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:9876/users/leolegends",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"users",
+								"leolegends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Usuario - Express Gateway",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:9876/users/leoribeiro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"users",
+								"leoribeiro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MicroServices",
+			"description": null,
+			"item": [
+				{
+					"name": "API Teste - Express Gateway",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "ApiKey 4zbjlCaxyWBKJf1gYRvarD:3DQSEL980C3VFtt8wJgYrj",
+								"description": "(String) keyId:keySecret"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

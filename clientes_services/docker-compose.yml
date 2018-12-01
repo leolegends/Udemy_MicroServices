@@ -1,0 +1,61 @@
+version: "3"
+services:
+ mysql:
+  image: mysql:5.7
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  ports:
+    - 3307:3306
+  environment:
+   MYSQL_ROOT_PASSWORD: 123456
+   MYSQL_DATABASE: lumen
+   MYSQL_USER: lumen
+   MYSQL_PASSWORD: 123456
+  networks: 
+    - microservice
+  volumes:
+    - "./data:/var/lib/mysql"
+ phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  networks:
+   - microservice
+  environment:
+   PMA_HOST: mysql
+   PMA_PORT: 3306
+  ports:
+   - '8081:80'
+  volumes: 
+   - /sessions
+ aplicacao:
+  image: leolegends/microservices_php:latest
+  deploy:
+   replicas: 5
+   resources:
+    limits:
+     cpus: "0.1"
+     memory: 50MB
+   restart_policy:
+    condition: on-failure   
+  ports: 
+   - 81:80
+  volumes:
+   - "/var/www/udemy/clientes_services/:/app"
+  networks:
+   - microservice
+ visualizer:
+  image: dockersamples/visualizer:stable
+  ports:
+   - "8000:8080"
+  volumes:
+   - "/var/run/docker.sock:/var/run/docker.sock"
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  networks: 
+   - microservice
+networks: 
+ microservice:  

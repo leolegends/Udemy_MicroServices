@@ -1,0 +1,48 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  hostname: localhost
+apiEndpoints:
+  api:
+   host: 192.168.0.144
+   path: /ip
+  service:
+   host: 192.168.0.144
+   path: /clientes
+serviceEndpoints:
+  api:
+    url: 'https://httpbin.org'
+  service:
+    url: 'http://192.168.0.144:81/public/'  
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  api_service:
+    apiEndpoints:
+      - api
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+      - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: api
+              changeOrigin: true
+
+  service:
+    apiEndpoints:
+      - service
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+      - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: service
+              changeOrigin: true
